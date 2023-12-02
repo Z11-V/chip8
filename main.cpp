@@ -9,6 +9,7 @@
 #include <chrono>
 #include <random>
 #include <map>
+#include <string>
 
 class chip8
 {
@@ -112,9 +113,8 @@ public:
         return 0;
     }
 
-    bool load_ROM() {
-        
-        std::ifstream rom("roms/IBMlogo.ch8",std::ios::binary);
+    bool load_ROM(std::string romf ) {
+        std::ifstream rom(romf,std::ios::binary);
         if (rom) {
             rom.seekg(0, std::ios::end);
             auto filesize = rom.tellg();
@@ -190,9 +190,9 @@ public:
         return interval;
     }
 
-    void run() {
+    void run(std::string rom) {
         SDLinit();
-        load_ROM();
+        load_ROM(rom);
         load_font();
         set_pc(512);
         int instructions_done = 0;
@@ -550,6 +550,6 @@ chip8::~chip8()
 
 int main(int argc, char* args[]) {
     chip8 emulator;
-    emulator.run();
+    emulator.run("roms/IBMlogo.ch8");
     return 0;
 }
