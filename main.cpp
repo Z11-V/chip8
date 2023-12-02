@@ -114,7 +114,7 @@ public:
 
     bool load_ROM() {
         
-        std::ifstream rom("IBMlogo.ch8",std::ios::binary);
+        std::ifstream rom("roms/IBMlogo.ch8",std::ios::binary);
         if (rom) {
             rom.seekg(0, std::ios::end);
             auto filesize = rom.tellg();
