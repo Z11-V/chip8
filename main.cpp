@@ -14,14 +14,14 @@ class chip8
 {
 
 public:
-    bool debug_print {false};
-    bool debug_step {false};
+    const bool debug_print {false};
+    const bool debug_step {false};
 
-    bool memory_quirk {true};
-    bool shift_quirk {true};
-    bool jump_quirk {true};
+    const bool memory_quirk {true};
+    const bool shift_quirk {true};
+    const bool jump_quirk {true};
 
-    int instructions_per_second {700};
+    const int instructions_per_second {700};
 
 private:
     static const int screen_width {64};
