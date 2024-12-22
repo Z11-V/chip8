@@ -14,8 +14,8 @@ class chip8
 {
 
 public:
-    const bool debug_print {false};
-    const bool debug_step {false};
+    bool debug_print {false};
+    bool debug_step {false};
 
     const bool memory_quirk {true};
     const bool shift_quirk {true};
@@ -98,7 +98,7 @@ public:
             printf("SDL error : %s\n", SDL_GetError( ));
             return 1;
         }
-        window = SDL_CreateWindow("test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow("Chip8", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
         if (window == nullptr) {
             printf("SDL error : %s\n", SDL_GetError( ));
             SDL_Quit();
@@ -634,11 +634,13 @@ chip8::~chip8()
 
 int main(int argc, char* args[]) {
     chip8 emulator;
-    //emulator.debug_print = true;
-    //emulator.debug_step = true;
     std::string rom {"roms/IBMlogo.ch8"};
     if(args[1]) {
         rom=std::string("roms/") + args[1] + ".ch8";
+    }
+    if(args[2] and (strcmp(args[2],"-debug") == 0)) {
+        emulator.debug_print = true;
+        emulator.debug_step = true;
     }
     emulator.run(rom);
     return 0;
